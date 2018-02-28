@@ -1,0 +1,375 @@
+# i3WM Config:
+
+
+# Dependency: -------------------------------------------------------------------
+# acpid, alsa-utils, bash, compton, conky, cron, feh, fonts-font-awesome
+# fonts-droid, i3blocks, scrot, slim, vnstat, ubuntu-font-family, urxvt
+# optional: audacity, emacs25, firefox, gcolor2, gimp, htop, kbdd
+#           lxappearance, mpv, musescore, telegram, virtualbox, xdotool, xinput -
+
+
+# Variables: --------------------------------------------------------------------
+
+## Custom Variable:
+set $float floating enable border pixel 0
+set $move move container to workspace
+set $ws1_position move position 30px 52px
+set $ws1_resize resize set 1305px 684px
+set $screen_locate 'mv $f ~/Screenshots'
+set $PATH ~/.config/i3
+
+## Workspace Name:
+set $ws1 "1:  Desktop"
+set $ws2 "2:  GUI"
+set $ws3 "3:  Monitor"
+## Other Icon: , , 
+
+## Default keybindings:
+## Set Default Key:
+set $mod Mod4
+# mod1= Alt Key
+# mod4= Win Key
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+# -------------------------------------------------------------------------------
+
+
+# Shortcuts: --------------------------------------------------------------------
+
+## Volume:
+set $VOL_PATH ~/.i3/Files/fn_keys/amixer/amixer_volume.sh
+bindsym XF86AudioRaiseVolume exec amixer -q set Master 2dB+ unmute
+## See More: Vim <URL:./Files/fn_keys/amixer/amixer_volume.sh>
+bindsym XF86AudioLowerVolume exec exec amixer -q set Master 2dB- unmute
+bindsym XF86AudioMute exec amixer -q set Master toggle
+## Brightness:
+set $BRT_PATH ~/.i3/Files/fn_keys/xrandr_brightness/xrandr_brightness.sh
+bindsym XF86MonBrightnessUp exec $BRT_PATH -b up
+bindsym XF86MonBrightnessDown exec $BRT_PATH -b down
+
+## Num, Caps and Scroll Lock:
+bindsym Caps_Lock --release exec pkill -SIGRTMIN+19 i3blocks
+## See More: Vim <URL:./Files/i3blocks/i3blocks.conf#tn=Locks>
+bindsym Num_Lock --release exec pkill -SIGRTMIN+19 i3blocks
+bindsym Scroll_Lock --release exec pkill -SIGRTMIN+19 i3blocks
+
+## Font:
+font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+font pango:Ubuntu 0
+
+## start a terminal:
+bindsym $mod+Return exec urxvt -name "URxvt_Main"
+
+## kill focused window:
+bindsym $mod+q kill
+
+## change focus:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+## move focused window:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+## split in horizontal orientation:
+bindsym $mod+h split h
+
+## split in vertical orientation:
+bindsym $mod+v split v
+
+## enter fullscreen mode for the focused container:
+bindsym $mod+f fullscreen
+
+## change container layout (stacked, tabbed, toggle split):
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+## toggle tiling / floating:
+bindsym $mod+Shift+space floating toggle
+
+## change focus between tiling / floating windows:
+bindsym $mod+space focus mode_toggle
+
+## focus the parent container:
+bindsym $mod+a focus parent
+
+## focus the child container:
+bindsym $mod+s focus child
+
+## switch to workspace:
+bindsym $mod+z workspace $ws1; exec pkill -SIGRTMIN+12 i3blocks
+bindsym $mod+x workspace $ws2; exec pkill -SIGRTMIN+12 i3blocks
+bindsym $mod+c workspace $ws3; exec pkill -SIGRTMIN+12 i3blocks
+
+## move focused container to workspace:
+bindsym $mod+Shift+z move container to workspace $ws1
+bindsym $mod+Shift+x move container to workspace $ws2
+
+## navigate workspaces next / previous:
+bindsym $mod+Ctrl+Right workspace next
+bindsym $mod+Ctrl+Left workspace prev
+
+## restart i3 inplace,
+## (preserves your layout/session, can be used to upgrade i3):
+bindsym $mod+shift+r restart
+
+## exit i3 (logs you out of your X session):
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Do you really want \
+to exit i3?' -b 'Yes, exit i3' 'i3-msg exit'"
+
+## reload i3
+bindsym $mod+shift+v reload
+
+## Moving containers/workspaces to RandR outputs:
+# bindsym $mod+m move workspace to output right (or VGA)
+
+## resize window (you can also use the mouse for that)
+bindsym $mod+r mode "resize"
+mode "resize" {
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+## Layout mode for new containers:
+workspace_layout tabbed
+
+## Border style for new windows: (normal | pixel)
+new_window pixel 2
+new_float pixel 2
+
+## Hiding vertical borders: (none|vertical|horizontal|both)
+hide_edge_borders both
+
+## Automatically putting workspaces on specific screens:
+# xrandr --current
+# workspace 1 output LVDS1
+
+## Configuring your monitors:
+# xrandr --output VGA1 --auto --left-of LVDS1
+
+## Changing colors:
+# class                 border  backgr. text    
+client.focused          #357AC3 #357AC3 #dedede 
+client.focused_inactive #121212 #121212 #dedede 
+client.unfocused        #121212 #121212 #dedede 
+client.urgent           #121212 #121212 #dedede
+# client.placeholder    #000000 #0c0c0c #ffffff #000000
+# client.background     #ffffff
+
+## Focus follows mouse:
+focus_follows_mouse no
+
+## Focus wrapping:
+# force_focus_wrapping yes
+
+## Mouse wrping: (for diffrent Screen)
+mouse_warping none
+
+## Popups during fullscreen mode: (smart|ignore|leave_fullscreen)
+popup_during_fullscreen smart
+
+## Automatic back-and-forth when switching to the current workspace:
+# workspace_auto_back_and_forth yes
+
+## Delaying urgency hint reset on workspace change:
+# force_display_urgency_hint 0 ms
+# for_window [urgent=latest] focus ----------------------------------------------
+
+
+# Statusbar: --------------------------------------------------------------------
+
+## i3bar control:
+# bar hidden_state hide|show|toggle [<bar_id>]
+# bar mode dock|hide|invisible|toggle [<bar_id>]
+ bindsym $mod+b bar mode hide bar-1
+
+bindsym $mod+b bar mode toggle bar-1
+bar {
+	separator_symbol ":|:"
+	status_command i3blocks -c $PATH/Files/i3blocks/i3blocks.conf
+	## See More: Vim <URL:./Files/i3blocks/i3blocks.conf>
+	# status_command i3status --config /etc/i3status.conf
+	## See More: Vim <URL:/etc/i3status.conf>
+	font pango:FontAwesome, Ubuntu 10
+	mode dock
+	id bar-1
+	position bottom
+#	output eDP-1
+	strip_workspace_numbers yes
+	# tray_padding 1
+	# tray_output VGA-1 #(primary,LVDS1)
+	workspace_buttons no
+	# binding_mode_indicator yes
+
+colors {
+        background #121212
+        statusline #ABABAB
+        separator #121212
+
+        focused_workspace  #357AC3 #357AC3 #dedede
+        active_workspace   #121212 #5f676a #dedede
+        inactive_workspace #424242 #424242 #ABABAB
+    	urgent_workspace   #CA0021 #CA0021 #eeeeee
+    }
+
+} # -----------------------------------------------------------------------------
+
+
+# Screenshot: -------------------------------------------------------------------
+
+bindsym Print exec scrot -e $screen_locate
+bindsym $mod+P --release exec scrot -q 100 -se $screen_locate
+## Create Screenshot with scrot -------------------------------------------------
+
+
+# Stop & Cont App: --------------------------------------------------------------
+
+## Firefox
+bindsym $mod+F9 --release exec killall -SIGSTOP firefox
+bindsym $mod+shift+F9 --release exec killall -SIGCONT firefox # -----------------
+
+
+# Application Manager: ----------------------------------------------------------
+
+## Lockscreen:
+bindsym $mod+F4 exec /usr/bin/slimlock
+
+## Voice config:
+bindsym $mod+m exec urxvt -name "XTerm_alsamx" -e 'alsamixer'
+
+## Theme Manager:
+bindsym $mod+l exec lxappearance
+
+## Gcolor (Hex Color):
+bindsym $mod+g exec gcolor2
+
+## Jumping to specific windows:
+# bindsym $mod+a [class="urxvt" title="VIM"] focus
+## Arbitrary commands for specific windows (for_window):
+# for_window [class="^.*"] floating enable
+for_window [class="(?i)urxvt" instance="XTerm_alsamx"] $float
+for_window [class="(?i)gxmessage"] $float
+for_window [class="(?i)lxappearance"] floating enable
+for_window [class="(?i)feh"] $float move position 0 0
+## Open applications on specific workspaces
+# assign [class="urxvt"] 2
+# xprop | grep WM_CLASS ---------------------------------------------------------
+
+
+# Exec app on specific workspace: -----------------------------------------------
+
+## Start application on workspace:
+exec --no-startup-id sleep 1s; urxvt -name "URxvt_Main"
+# exec --no-startup-id sleep 1s; firefox
+exec --no-startup-id sleep 4s; emacs25
+# set $CONKY_PATH ~/.i3/Files/conky/media-conky/conky0.conf
+# exec --no-startup-id sleep 4s; conky -x 38 -y 377 -c $CONKY_PATH
+## See More: Vim <URL:./Files/conky/media-conky/conky0.conf>
+exec --no-startup-id sleep 5s; urxvt -name "XTerm_ddown" -e 'htop'
+exec --no-startup-id sleep 6s; telegram
+
+
+## Bindsym for run app after boot:
+bindsym $mod+F1 exec --no-startup-id conky -x 38 -y 377 -c $CONKY_PATH
+bindsym $mod+F2 exec --no-startup-id emacs25
+bindsym $mod+1 exec --no-startup-id firefox
+bindsym $mod+2 exec --no-startup-id libreoffice
+bindsym $mod+3 exec --no-startup-id gimp
+bindsym $mod+4 exec --no-startup-id audacity
+bindsym $mod+5 exec --no-startup-id musescore
+bindsym $mod+6 exec --no-startup-id telegram
+# bindsym $mod+7 exec --no-startup-id virtualbox
+bindsym --release $mod+9 exec --no-startup-id xkill # ---------------------------
+
+
+# Workspace Manager: ------------------------------------------------------------
+
+
+## Workspace $ws1:
+## Main urxvt (Shell)
+for_window [class="(?i)urxvt" instance="URxvt_Main"] $float $ws1_position
+for_window [class="(?i)urxvt" instance="URxvt_Main"] $ws1_resize
+assign [class="(?i)urxvt" instance="URxvt_Main"] $ws1
+
+# Firefox
+for_window [class="(?i)firefox"] $float move position center
+for_window [class="(?i)firefox" instance="Navigator"] $float $ws1_position
+for_window [class="(?i)firefox" instance="Navigator"] $ws1_resize
+assign [class="(?i)firefox"] $ws1
+
+# Emacs
+for_window [class="(?i)emacs"] $float $ws1_position
+for_window [class="(?i)emacs"] resize set 1345px 720px
+assign [class="(?i)emacs"] $ws1
+
+# Viewnior
+for_window [class="(?i)viewnior"] $float $ws1_position $ws1_resize
+assign [class="(?i)viewnior"] $ws1
+
+# MPV for Play Video
+for_window [class="(?i)mpv"] $float
+assign [class="(?i)mpv"] $ws1
+
+
+## Workspace $ws2:
+# Run DropDown urxvt for htop
+bindsym $mod+F12 exec urxvt -name "XTerm_ddown" -e 'htop'
+for_window [class="(?i)urxvt" instance="XTerm_ddown"] $float move scratchpad
+for_window [class="(?i)urxvt" instance="XTerm_ddown"] move position 0px 20px
+for_window [class="(?i)urxvt" instance="XTerm_ddown"] resize grow width 800px
+for_window [class="(?i)urxvt" instance="XTerm_ddown"] move scratchpad
+for_window [class="(?i)urxvt" instance="XTerm_ddown"] resize shrink height 80px
+bindsym F12 [class="(?i)urxvt" instance="XTerm_ddown"] scratchpad show
+
+assign [class="(?i)libreoffice"] $ws2
+assign [class="(?i)audacity"] $ws2
+assign [class="(?i)gimp"] $ws2
+assign [class="(?i)musescore"] $ws2
+assign [class="(?i)telegram"] $ws2
+# assign [class="(?i)virtualbox"] $ws2
+
+# Telegram:
+for_window [class="(?i)telegram"] border pixel 0
+
+## Workspace $ws3:
+# Conky (Media List)
+for_window [class="(?i)Media-conky"] $float
+assign [class="(?i)Media-conky"] $ws3 # -----------------------------------------
+
+
+# Automatically starting applications: ------------------------------------------
+
+exec --no-startup-id $BRT_PATH -s 0.6
+exec xrdb -load ~/.Xresources
+## urxvt Config, See More: Vim <URL:./Files/urxvt/.Xresources>
+exec --no-startup-id $PATH/Files/touchpad_tap/touchpad_tap.sh
+## Enable Tap to Click
+## See More: Vim <URL:./Files/touchpad_tap/touchpad_tap.sh>
+exec --no-startup-id ~/Shell_Script/small-script/mouse_click/mouse_counter.sh -r
+## See More: https://gitlab.com/RasoolSN/small-script/blob/master/mouse_counter.sh
+exec --no-startup-id $PATH/Files/i3blocks/aptlist_script/aptlist.sh
+## See More: Vim <URL:./Files/i3blocks/aptlist_script/aptlist.sh>
+exec --no-startup-id /usr/bin/kbdd
+## Automatic Chaneg Layout
+set $PIC_PATH ~/Pictures/MyImage
+exec --no-startup-id /usr/bin/feh --bg-fill $PIC_PATH/IMG_20180223_081158.jpg
+## Set Background
+exec --no-startup-id compton -b --config $PATH/Files/compton/compton.conf
+## Compositor Manager, See More: Vim <URL:./Files/compton/compton.conf>
+exec --no-startup-id $PATH/Files/i3blocks/time_script/time_script.sh
+## Time Manager, See More: Vim <URL:./Files/i3blocks/time_script>
+
+
+# THE END -----------------------------------------------------------------------

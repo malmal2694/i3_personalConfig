@@ -1,0 +1,18 @@
+# Description:
+## The ACPID program is for the event to be on the ACPI tools.
+## For example, connecting or not connecting the battery charger,
+## Open and close the door of the laptop,
+## Connect the headphone jack, etc.
+
+# Event description:
+# For Connect Ac_Adapter:
+## event=ac_adapter ACPI0003:00 00000000 00000001 
+
+# For Disconnect Ac_Adapter:
+## event=processor LNXCPU:00 00000080 00000008
+
+# For Open LID (Laptop Door):
+## event=button/lid LID open
+
+# For Close LID (Laptop Door):
+## event=button/lid LID close

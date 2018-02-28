@@ -1,0 +1,2 @@
+event=processor LNXCPU:00 00000080 00000008
+action=/etc/acpi/ac_power.sh

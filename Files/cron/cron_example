@@ -1,0 +1,12 @@
+# Copy the code below and add the file opens with the following command:
+# $ sudo crontab -e
+@reboot /usr/sbin/acpid
+# See More: Vim <URL:../acpi_event/events/README>
+@reboot sudo vnstat -u -i $(cat /etc/network/interfaces | grep "^iface enp" | cut -f2 -d' '
+* * * * * sudo vnstat -u -i $(cat /etc/network/interfaces | grep "^iface enp" | cut -f2 -d' '
+0 * * * * sudo apt update
+
+
+# $ crontab -e
+* * * * * $HOME/.i3/Files/i3blocks/net_status/hiweb_status.sh
+# See More: Vim <URL:../i3blocks/net_status/hiweb_status_git.sh>

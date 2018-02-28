@@ -15,6 +15,10 @@ set $float floating enable border pixel 0
 set $move move container to workspace
 set $ws1_position move position 30px 52px
 set $ws1_resize resize set 1305px 684px
+
+set $ws4_position move position 35px 25px
+set $ws4_resize resize set 1490px 770px
+
 set $screen_locate 'mv $f ~/Screenshots'
 set $PATH ~/.config/i3
 
@@ -22,7 +26,7 @@ set $PATH ~/.config/i3
 set $ws1 "1:  Desktop"
 set $ws2 "2:  GUI"
 set $ws3 "3:  Monitor"
-set $ws4 "4 Developer"
+set $ws4 "4: Developer"
 ## Other Icon: , , 
 
 ## Default keybindings:
@@ -62,6 +66,8 @@ font pango:Ubuntu 0
 ## start a terminal:
 bindsym $mod+Return exec urxvt -name "URxvt_Main"
 
+## start a terminal in workspace Develop
+bindsym $mod+shift+d exec urxvt -name "URxvt_Develop"
 ## kill focused window:
 bindsym $mod+q kill
 
@@ -106,7 +112,7 @@ bindsym $mod+s focus child
 bindsym $mod+z workspace $ws1; exec pkill -SIGRTMIN+12 i3blocks
 bindsym $mod+x workspace $ws2; exec pkill -SIGRTMIN+12 i3blocks
 bindsym $mod+c workspace $ws3; exec pkill -SIGRTMIN+12 i3blocks
-bindsym $mod+d workspace $ws4; exec pkill -SIGRTMIN+12 i3blocks
+bindsym $mod+d workspace $ws4; exec pkill -SIGRTMIN+12 i3blocks # Develop workspace
 
 ## move focused container to workspace:
 bindsym $mod+Shift+z move container to workspace $ws1
@@ -195,11 +201,11 @@ popup_during_fullscreen smart
 ## i3bar control:
 # bar hidden_state hide|show|toggle [<bar_id>]
 # bar mode dock|hide|invisible|toggle [<bar_id>]
- bindsym $mod+b bar mode hide bar-1
+bindsym $mod+b bar mode hide bar-1
 
-bindsym $mod+b bar mode toggle bar-1
+#bindsym $mod+b bar mode toggle bar-1
 bar {
-	separator_symbol ":|:"
+    # separator_symbol ":|:"
 	status_command i3blocks -c $PATH/Files/i3blocks/i3blocks.conf
 	## See More: Vim <URL:./Files/i3blocks/i3blocks.conf>
 	# status_command i3status --config /etc/i3status.conf
@@ -274,6 +280,7 @@ for_window [class="(?i)feh"] $float move position 0 0
 
 ## Start application on workspace:
 exec --no-startup-id sleep 1s; urxvt -name "URxvt_Main"
+exec --no-startup-id sleep 2s; urxvt -name "URxvt_Develop" # Start urxvt for programming
 # exec --no-startup-id sleep 1s; firefox
 exec --no-startup-id sleep 4s; emacs25
 # set $CONKY_PATH ~/.i3/Files/conky/media-conky/conky0.conf
@@ -304,7 +311,6 @@ bindsym --release $mod+9 exec --no-startup-id xkill # --------------------------
 for_window [class="(?i)urxvt" instance="URxvt_Main"] $float $ws1_position
 for_window [class="(?i)urxvt" instance="URxvt_Main"] $ws1_resize
 assign [class="(?i)urxvt" instance="URxvt_Main"] $ws1
-
 # Firefox
 for_window [class="(?i)firefox"] $float move position center
 for_window [class="(?i)firefox" instance="Navigator"] $float $ws1_position
@@ -350,6 +356,10 @@ for_window [class="(?i)telegram"] border pixel 0
 for_window [class="(?i)Media-conky"] $float
 assign [class="(?i)Media-conky"] $ws3 # -----------------------------------------
 
+## Workspace $ws4:
+for_window [class="(?i)urxvt" instance="URxvt_Develop"] $float $ws4_position
+for_window [class="(?i)urxvt" instance="URxvt_Develop"] $float $ws4_resize
+for_window [class="(?i)urxvt" instance="URxvt_Develop"] $float $ws4
 
 # Automatically starting applications: ------------------------------------------
 

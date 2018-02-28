@@ -22,6 +22,7 @@ set $PATH ~/.config/i3
 set $ws1 "1:  Desktop"
 set $ws2 "2:  GUI"
 set $ws3 "3:  Monitor"
+set $ws4 "4 Developer"
 ## Other Icon: , , 
 
 ## Default keybindings:
@@ -105,6 +106,7 @@ bindsym $mod+s focus child
 bindsym $mod+z workspace $ws1; exec pkill -SIGRTMIN+12 i3blocks
 bindsym $mod+x workspace $ws2; exec pkill -SIGRTMIN+12 i3blocks
 bindsym $mod+c workspace $ws3; exec pkill -SIGRTMIN+12 i3blocks
+bindsym $mod+d workspace $ws4; exec pkill -SIGRTMIN+12 i3blocks
 
 ## move focused container to workspace:
 bindsym $mod+Shift+z move container to workspace $ws1

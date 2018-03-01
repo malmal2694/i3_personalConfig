@@ -26,7 +26,7 @@ set $PATH ~/.config/i3
 set $ws1 "1:  Desktop"
 set $ws2 "2:  GUI"
 set $ws3 "3:  Monitor"
-set $ws4 "4: Developer"
+set $ws4 "4:  Developer"
 ## Other Icon: , , 
 
 ## Default keybindings:
@@ -42,6 +42,8 @@ floating_modifier $mod
 
 # Shortcuts: --------------------------------------------------------------------
 
+##Chnge layout(language)
+exec_always "setxkbmap -model pc104 -layout us,ir -variant ,, -option grp:alt_shift_toggle"
 ## Volume:
 set $VOL_PATH ~/.i3/Files/fn_keys/amixer/amixer_volume.sh
 bindsym XF86AudioRaiseVolume exec amixer -q set Master 2dB+ unmute
@@ -357,9 +359,10 @@ for_window [class="(?i)Media-conky"] $float
 assign [class="(?i)Media-conky"] $ws3 # -----------------------------------------
 
 ## Workspace $ws4:
+set $move4 move container to workspace $ws4
 for_window [class="(?i)urxvt" instance="URxvt_Develop"] $float $ws4_position
-for_window [class="(?i)urxvt" instance="URxvt_Develop"] $float $ws4_resize
-for_window [class="(?i)urxvt" instance="URxvt_Develop"] $float $ws4
+for_window [class="(?i)urxvt" instance="URxvt_Develop"] $ws4_resize
+assign [class="(?i)urxvt" instance="URxvt_Develop"] $ws4
 
 # Automatically starting applications: ------------------------------------------
 

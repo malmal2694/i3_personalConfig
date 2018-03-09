@@ -378,7 +378,7 @@ exec --no-startup-id $PATH/Files/i3blocks/aptlist_script/aptlist.sh
 ## See More: Vim <URL:./Files/i3blocks/aptlist_script/aptlist.sh>
 exec --no-startup-id /usr/bin/kbdd
 ## Automatic Chaneg Layout
-set $PIC_PATH ~/.config/i3/Files/wallpaper/Nature.jpg
+set $PIC_PATH ~/.config/i3/Files/wallpaper/glacier-869593_1920.jpg
 exec --no-startup-id /usr/bin/feh --bg-fill $PIC_PATH
 ## Set Background
 exec --no-startup-id compton -b --config $PATH/Files/compton/compton.conf

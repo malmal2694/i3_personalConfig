@@ -68,6 +68,9 @@ font pango:Ubuntu 0
 ## start a terminal:
 bindsym $mod+Return exec urxvt -name "URxvt_Main"
 
+## start Atom in workspace Develop
+bindsym $mod+a exec atom
+
 ## start a terminal in workspace Develop
 bindsym $mod+shift+d exec urxvt -name "URxvt_Develop"
 ## kill focused window:
@@ -170,10 +173,10 @@ hide_edge_borders both
 # xrandr --output VGA1 --auto --left-of LVDS1
 
 ## Changing colors:
-# class                 border  backgr. text    
-client.focused          #357AC3 #357AC3 #dedede 
-client.focused_inactive #121212 #121212 #dedede 
-client.unfocused        #121212 #121212 #dedede 
+# class                 border  backgr. text
+client.focused          #357AC3 #357AC3 #dedede
+client.focused_inactive #121212 #121212 #dedede
+client.unfocused        #121212 #121212 #dedede
 client.urgent           #121212 #121212 #dedede
 # client.placeholder    #000000 #0c0c0c #ffffff #000000
 # client.background     #ffffff
@@ -282,7 +285,7 @@ for_window [class="(?i)feh"] $float move position 0 0
 
 ## Start application on workspace:
 exec --no-startup-id sleep 1s; urxvt -name "URxvt_Main"
-exec --no-startup-id sleep 2s; urxvt -name "URxvt_Develop" # Start urxvt for programming
+#exec --no-startup-id sleep 2s; urxvt -name "URxvt_Develop" # Start urxvt for programming
 # exec --no-startup-id sleep 1s; firefox
 exec --no-startup-id sleep 4s; emacs25
 # set $CONKY_PATH ~/.i3/Files/conky/media-conky/conky0.conf
@@ -364,6 +367,10 @@ for_window [class="(?i)urxvt" instance="URxvt_Develop"] $float $ws4_position
 for_window [class="(?i)urxvt" instance="URxvt_Develop"] $ws4_resize
 assign [class="(?i)urxvt" instance="URxvt_Develop"] $ws4
 
+for_window [class="(?i)atom"] $float fullscreen
+#for_window [class="(?i)atom"] ws4_resize
+assign [class=(?i)atom] $ws4
+
 # Automatically starting applications: ------------------------------------------
 
 exec --no-startup-id $BRT_PATH -s 0.6
@@ -379,7 +386,7 @@ exec --no-startup-id $PATH/Files/i3blocks/aptlist_script/aptlist.sh
 exec --no-startup-id /usr/bin/kbdd
 ## Automatic Chaneg Layout
 set $PIC_PATH ~/.config/i3/Files/wallpaper/round-leaved-bellflower-1576104_1920.jpg
-## --bg-scala, --bg-fill, tile, center, scale, max 
+## --bg-scala, --bg-fill, tile, center, scale, max
 exec --no-startup-id /usr/bin/feh --bg-scale $PIC_PATH
 ## Set Background
 exec --no-startup-id compton -b --config $PATH/Files/compton/compton.conf
